@@ -7,12 +7,6 @@ class AddVehicleData extends VehicleEvent {
   VehicleModel vehicleData;
 }
 
-class FetchVehicleData extends VehicleEvent {
-  FetchVehicleData({required this.vehicleType});
-
-  String vehicleType;
-}
-
 class DeleteVehicleData extends VehicleEvent {
   DeleteVehicleData({required this.vehicleNo});
 

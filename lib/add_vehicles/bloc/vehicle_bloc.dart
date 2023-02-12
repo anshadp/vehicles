@@ -11,7 +11,6 @@ part 'vehicle_state.dart';
 class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
   VehicleBloc({required this.firebaseRepository}) : super(VehicleInitial()) {
     on<AddVehicleData>(_addVehicleDetails);
-    on<FetchVehicleData>(_fetchVehicleDetails);
     on<DeleteVehicleData>(_deleteVehicleDetails);
   }
 
@@ -21,12 +20,6 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
       AddVehicleData event, Emitter<VehicleState> emit) {
     firebaseRepository.addVehicles(event.vehicleData);
     emit(VehicleAddedSuccess());
-  }
-
-  FutureOr<void> _fetchVehicleDetails(
-      FetchVehicleData event, Emitter<VehicleState> emit) async {
-    var data = await firebaseRepository.fetchVehicles(event);
-    emit(FetchVehicleDataSuccess(vehicleDetails: data));
   }
 
   FutureOr<void> _deleteVehicleDetails(

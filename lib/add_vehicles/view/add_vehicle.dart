@@ -12,7 +12,24 @@ class AddVehicle extends StatefulWidget {
 class _AddVehicleState extends State<AddVehicle> {
   final TextEditingController _vehicleNo = TextEditingController();
 
-  List<String> vehicleBrands = ['BMW', 'Benz'];
+  List<String> vehicleBrandCars = [
+    'BMW',
+    'Benz',
+    'WolksWagon',
+    'Audi',
+    'RangeRover',
+    'LandRover',
+    'Supra'
+  ];
+  List<String> vehicleBrandBikes = [
+    'BMW',
+    'RE',
+    'Yamaha',
+    'Bajaj',
+    'Java',
+    'Honda'
+  ];
+
   List<String> vehicleTypes = ['Bike', 'Car'];
   List<String> fuelTypes = ['Petrol', 'Diesel'];
 
@@ -71,22 +88,24 @@ class _AddVehicleState extends State<AddVehicle> {
                     ),
                   ),
                   CDrop(
-                    items: vehicleBrands,
-                    title: 'Brand Name',
-                    value: selectedVehicleBrand,
-                    onChanged: (a) {
-                      setState(() {
-                        selectedVehicleBrand = a;
-                      });
-                    },
-                  ),
-                  CDrop(
                     items: vehicleTypes,
                     title: 'Vehicle Type',
                     value: selectedVehicleType,
                     onChanged: (a) {
                       setState(() {
                         selectedVehicleType = a;
+                      });
+                    },
+                  ),
+                  CDrop(
+                    items: (selectedVehicleType == 'Car')
+                        ? vehicleBrandCars
+                        : vehicleBrandBikes,
+                    title: 'Brand Name',
+                    value: selectedVehicleBrand,
+                    onChanged: (a) {
+                      setState(() {
+                        selectedVehicleBrand = a;
                       });
                     },
                   ),

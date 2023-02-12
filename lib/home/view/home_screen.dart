@@ -5,7 +5,9 @@ import 'package:vechicles/add_vehicles/view/add_vehicle.dart';
 import 'package:vechicles/home/home.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+
+  final TextStyle tabBarStyle = TextStyle(fontSize: 20);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +17,16 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Vehicle Details'),
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
-              Text('Bike'),
-              Text('Car'),
+              Text(
+                'Bike',
+                style: tabBarStyle,
+              ),
+              Text(
+                'Car',
+                style: tabBarStyle,
+              ),
             ],
           ),
         ),
@@ -41,9 +49,9 @@ class HomeScreen extends StatelessWidget {
             builder: (context) => AddVehicle(),
           )),
       child: Container(
-        color: Colors.black,
-        padding: const EdgeInsets.all(20),
-        margin: const EdgeInsets.all(20),
+        color: Colors.teal,
+        padding: const EdgeInsets.all(15),
+        margin: const EdgeInsets.all(10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
@@ -52,12 +60,12 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.amber,
+                color: Colors.white,
               ),
             ),
             Icon(
               Icons.add,
-              color: Colors.amber,
+              color: Colors.white,
               size: 28,
             ),
           ],

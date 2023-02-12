@@ -1,57 +1,63 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:vechicles/add_vehicles/add_vehicle.dart';
 
-class VehicleCard extends StatelessWidget {
-  VehicleCard({Key? key, required this.vehicleData}) : super(key: key);
+class VehicleCard extends StatefulWidget {
+  const VehicleCard({Key? key, required this.vehicleData}) : super(key: key);
 
-  DocumentSnapshot<Object?> vehicleData;
+  final VehicleModel vehicleData;
 
   @override
+  State<VehicleCard> createState() => _VehicleCardState();
+}
+
+class _VehicleCardState extends State<VehicleCard> {
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          VehicleBloc(firebaseRepository: FirebaseRepository()),
-      child: Stack(
-        children: [
-          Card(
-            margin: EdgeInsets.all(10),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 25,
-                ),
-                cardData(
-                  'Vehicle No',
-                  vehicleData['vehicleNo'],
-                ),
-                cardData(
-                  'Brand Name',
-                  vehicleData['vehicleBrand'],
-                ),
-                cardData(
-                  'Vehicle Type',
-                  vehicleData['vehicleType'],
-                ),
-                cardData(
-                  'Fuel Type',
-                  vehicleData['fuelType'],
-                ),
-              ],
+    return Stack(
+      children: [
+        Card(
+          margin: const EdgeInsets.all(10),
+          child: Column(
+            children: <Widget>[
+              const SizedBox(
+                height: 25,
+              ),
+              cardData(
+                'Vehicle No',
+                widget.vehicleData.vehicleNo,
+              ),
+              cardData(
+                'Brand Name',
+                widget.vehicleData.vehicleBrand,
+              ),
+              cardData(
+                'Vehicle Type',
+                widget.vehicleData.vehicleType,
+              ),
+              cardData(
+                'Fuel Type',
+                widget.vehicleData.fuelType,
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          right: 5,
+          top: 1,
+          child: IconButton(
+            onPressed: () {
+              BlocProvider.of<VehicleBloc>(context).add(
+                DeleteVehicleData(vehicleNo: widget.vehicleData.vehicleNo),
+              );
+            },
+            icon: const Icon(
+              Icons.delete,
+              color: Colors.blueGrey,
             ),
           ),
-          Positioned(
-              right: 5,
-              top: 1,
-              child: IconButton(
-                  onPressed: () {
-                    BlocProvider.of<VehicleBloc>(context).add(
-                        DeleteVehicleData(vehicleNo: vehicleData['vehicleNo']));
-                  },
-                  icon: Icon(Icons.delete))),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -63,14 +69,14 @@ class VehicleCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               color: Colors.blueGrey,
             ),
           ),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.blueGrey,
             ),
           ),

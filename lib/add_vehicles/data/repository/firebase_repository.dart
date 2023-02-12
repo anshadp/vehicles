@@ -9,15 +9,6 @@ class FirebaseRepository {
     await vehiclesRef.doc(event.vehicleNo).set(event.toJson());
   }
 
-  Future<List<DocumentSnapshot>> fetchVehicles(FetchVehicleData event) async {
-    QuerySnapshot repliesQuery = await vehiclesRef
-        .where('vehicleType', isEqualTo: event.vehicleType)
-        .get();
-
-    List<DocumentSnapshot> replyDocs = repliesQuery.docs;
-    return replyDocs;
-  }
-
   void deleteVehicle(DeleteVehicleData event) async {
     await vehiclesRef.doc(event.vehicleNo).delete();
   }

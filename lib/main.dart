@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vechicles/add_vehicles/add_vehicle.dart';
 import 'package:vechicles/home/view/home_screen.dart';
 
 void main() async {
@@ -17,9 +19,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.teal,
       ),
-      home: HomeScreen(),
+      home: BlocProvider(
+        create: (context) =>
+            VehicleBloc(firebaseRepository: FirebaseRepository()),
+        child: HomeScreen(),
+      ),
     );
   }
 }
